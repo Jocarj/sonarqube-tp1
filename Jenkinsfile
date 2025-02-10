@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Récupération du code depuis le dépôt (remplacez l'URL par celle de votre dépôt)
-                git branch: 'main', url: 'file:///C:/Users/jcb10/Documents/GitHub/sonarqube-copy'
+                git branch: 'main', url: 'https://github.com/Jocarj/sonarqube-tp1.git'
             }
         }
 
