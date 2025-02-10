@@ -1,0 +1,41 @@
+name: CI SonarQube
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      - name: Configuration de Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Compilation du projet et exécution des tests unitaires
+        run: ./gradlew build test
+
+      - name: Lancement de SonarQube via Docker
+        run: |
+          docker run -d --name sonar -p 9000:9000 sonarqube:lts
+
+      - name: Attente du démarrage de SonarQube
+        run: sleep 30
+
+      - name: Exécution de l’analyse SonarQube
+        run: ./gradlew sonarqube
+        env:
+          SONAR_HOST_URL: "http://localhost:9000"
+
