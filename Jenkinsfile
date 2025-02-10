@@ -9,6 +9,13 @@ pipeline {
             }
         }
 
+        stage('Set Permissions') {
+            steps {
+                // Ensure that the gradlew script has execution permissions
+                sh 'chmod +x ./gradlew'
+            }
+        }
+
         stage('Build') {
             steps {
                 // Nettoyer et construire le projet sans exécuter les tests.
