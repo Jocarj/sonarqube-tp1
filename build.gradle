@@ -766,9 +766,10 @@ subprojects {
       ddAgent
     }
 
-    reports {
-      junitXml.required = true
-      html.required = true
+    testLogging {
+      events "passed", "skipped", "failed"
+      showStandardStreams = true
+      exceptionFormat "full"
     }
 
     dependencies {
