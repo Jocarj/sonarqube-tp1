@@ -766,6 +766,11 @@ subprojects {
       ddAgent
     }
 
+    reports {
+      junitXml.required = true
+      html.required = true
+    }
+
     dependencies {
       ddAgent 'com.datadoghq:dd-java-agent'
     }
